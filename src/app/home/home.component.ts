@@ -1,7 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { StatsService } from '../services/stats.service';
-import { ChartConfiguration } from 'chart.js';
+import { ChartData, ChartOptions } from 'chart.js';
 import { BehaviorSubject } from 'rxjs';
+
+interface ChartDataset {
+  data: number[];
+  label?: string;
+  backgroundColor?: string | string[];
+  borderColor?: string | string[];
+  borderWidth?: number;
+  fill?: boolean;
+  tension?: number;
+  pointBackgroundColor?: string;
+  pointBorderColor?: string;
+  pointHoverBackgroundColor?: string;
+  pointHoverBorderColor?: string;
+}
+
+interface ChartDataStructure {
+  labels?: string[];
+  datasets: ChartDataset[];
+}
 
 @Component({
   selector: 'app-home',
@@ -16,65 +35,198 @@ export class HomeComponent implements OnInit {
   totalAmount = 0;
 
   isLoading$ = new BehaviorSubject<boolean>(true);
-  diameter = 100;
+  diameter = 50;
 
-  // ✅ Pie Chart
-  pieChartLabels: string[] = ['Savings', 'Current'];
-  pieChartData: ChartConfiguration<'pie'>['data'] = {
-    labels: ['Savings', 'Current','Blocked'],
+  // Chart configurations
+  public pieChartLabels: string[] = ['Current Accounts', 'Savings Accounts', 'Business Accounts'];
+  public pieChartData: ChartDataStructure = {
+    labels: ['Current Accounts', 'Savings Accounts', 'Business Accounts'],
+    datasets: [{
+      data: [300, 500, 200],
+      backgroundColor: [
+        'rgba(37, 99, 235, 0.8)',
+        'rgba(34, 197, 94, 0.8)',
+        'rgba(245, 158, 11, 0.8)'
+      ],
+      borderColor: [
+        'rgba(37, 99, 235, 1)',
+        'rgba(34, 197, 94, 1)',
+        'rgba(245, 158, 11, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  public barChartData: ChartDataStructure = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     datasets: [
       {
-        data: [0, 0],
-        backgroundColor: ['#42A5F5', '#66BB6A'],
+        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Transactions',
+        backgroundColor: 'rgba(37, 99, 235, 0.8)',
+        borderColor: 'rgba(37, 99, 235, 1)',
+        borderWidth: 1
       }
     ]
   };
 
-  pieChartOptions: ChartConfiguration<'pie'>['options'] = {
+  public lineChartData: ChartDataStructure = {
+    labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    datasets: [
+      {
+        data: [65, 59, 80, 81, 56, 55, 40],
+        label: 'Daily Transactions',
+        fill: true,
+        tension: 0.4,
+        borderColor: 'rgba(37, 99, 235, 1)',
+        backgroundColor: 'rgba(37, 99, 235, 0.1)',
+        pointBackgroundColor: 'rgba(37, 99, 235, 1)',
+        pointBorderColor: '#fff',
+        pointHoverBackgroundColor: '#fff',
+        pointHoverBorderColor: 'rgba(37, 99, 235, 1)'
+      }
+    ]
+  };
+
+  public polarAreaChartData: ChartDataStructure = {
+    labels: ['Deposits', 'Withdrawals', 'Transfers', 'Payments'],
+    datasets: [{
+      data: [300, 500, 200, 100],
+      backgroundColor: [
+        'rgba(37, 99, 235, 0.8)',
+        'rgba(34, 197, 94, 0.8)',
+        'rgba(245, 158, 11, 0.8)',
+        'rgba(139, 92, 246, 0.8)'
+      ],
+      borderColor: [
+        'rgba(37, 99, 235, 1)',
+        'rgba(34, 197, 94, 1)',
+        'rgba(245, 158, 11, 1)',
+        'rgba(139, 92, 246, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  public pieChartOptions: ChartOptions = {
     responsive: true,
+    maintainAspectRatio: false,
     plugins: {
       legend: {
-        position: 'top'
+        position: 'bottom',
+        labels: {
+          padding: 20,
+          usePointStyle: true,
+          pointStyle: 'circle'
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#64748b',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 12,
+        boxPadding: 6,
+        usePointStyle: true,
+        callbacks: {
+          label: function(context: any) {
+            const label = context.label || '';
+            const value = context.raw || 0;
+            const total = context.dataset.data.reduce((a: number, b: number) => a + b, 0);
+            const percentage = Math.round((value as number / total) * 100);
+            return `${label}: ${value} (${percentage}%)`;
+          }
+        }
       }
     }
   };
 
-  // ✅ Bar Chart
-  barChartData: ChartConfiguration<'bar'>['data'] = {
-    labels: [],
-    datasets: [
-      {
-        label: 'Debit',
-        data: [],
-        backgroundColor: 'rgba(255, 99, 132, 0.5)',
-        borderColor: 'rgba(255, 99, 132, 1)',
-        borderWidth: 1
+  public barChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        display: false
       },
-      {
-        label: 'Credit',
-        data: [],
-        backgroundColor: 'rgba(54, 162, 235, 0.5)',
-        borderColor: 'rgba(54, 162, 235, 1)',
-        borderWidth: 1
-      },
-      {
-        label: 'Transfer',
-        data: [],
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-        borderColor: 'rgba(75, 192, 192, 1)',
-        borderWidth: 1
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#64748b',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 12,
+        boxPadding: 6
       }
-    ]
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: '#e2e8f0'
+        }
+      }
+    }
   };
 
-  barChartOptions: ChartConfiguration<'bar'>['options'] = {
+  public lineChartOptions: ChartOptions = {
     responsive: true,
-    scales: {
-      x: { title: { display: true, text: 'Date' } },
-      y: { title: { display: true, text: 'Amount ($)' } }
-    },
+    maintainAspectRatio: false,
     plugins: {
-      legend: { position: 'top' }
+      legend: {
+        display: false
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#64748b',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 12,
+        boxPadding: 6
+      }
+    },
+    scales: {
+      x: {
+        grid: {
+          display: false
+        }
+      },
+      y: {
+        beginAtZero: true,
+        grid: {
+          color: '#e2e8f0'
+        }
+      }
+    }
+  };
+
+  public polarAreaChartOptions: ChartOptions = {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      legend: {
+        position: 'bottom',
+        labels: {
+          padding: 20,
+          usePointStyle: true,
+          pointStyle: 'circle'
+        }
+      },
+      tooltip: {
+        backgroundColor: 'rgba(255, 255, 255, 0.9)',
+        titleColor: '#1e293b',
+        bodyColor: '#64748b',
+        borderColor: '#e2e8f0',
+        borderWidth: 1,
+        padding: 12,
+        boxPadding: 6
+      }
     }
   };
 
@@ -155,6 +307,8 @@ export class HomeComponent implements OnInit {
             {
               data: [savings, current],
               backgroundColor: ['#42A5F5', '#66BB6A'],
+              borderColor: ['#1976D2', '#388E3C'],
+              borderWidth: 1
             }
           ]
         };

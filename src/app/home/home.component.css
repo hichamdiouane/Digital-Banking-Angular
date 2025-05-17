@@ -72,3 +72,225 @@
   width:500px;
 }
 
+.dashboard-container {
+  padding: var(--spacing-lg);
+}
+
+.dashboard-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.dashboard-title {
+  font-size: 1.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.dashboard-subtitle {
+  color: var(--text-secondary);
+  margin: var(--spacing-xs) 0 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--spacing-lg);
+  margin-bottom: var(--spacing-xl);
+}
+
+.stat-card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.stat-card-content {
+  padding: var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+}
+
+.stat-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stat-icon-wrapper mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+.stat-icon-wrapper.blue {
+  background-color: var(--primary-color);
+}
+
+.stat-icon-wrapper.green {
+  background-color: var(--success-color);
+}
+
+.stat-icon-wrapper.orange {
+  background-color: var(--warning-color);
+}
+
+.stat-icon-wrapper.purple {
+  background-color: #8b5cf6;
+}
+
+.stat-info {
+  flex: 1;
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  margin: var(--spacing-xs) 0 0;
+  font-size: 0.875rem;
+}
+
+.charts-section {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-lg);
+}
+
+.chart-card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-md);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.chart-card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.chart-card mat-card-header {
+  padding: var(--spacing-lg);
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.chart-card mat-card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.chart-card mat-card-subtitle {
+  color: var(--text-secondary);
+  margin: var(--spacing-xs) 0 0;
+}
+
+.chart-container {
+  padding: var(--spacing-lg);
+  height: 300px;
+  position: relative;
+}
+
+.time-filter {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+}
+
+.time-toggle-group {
+  background-color: #f1f5f9;
+  border-radius: var(--border-radius-md);
+  overflow: hidden;
+}
+
+.time-toggle-group .mat-button-toggle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  padding: 0 var(--spacing-md);
+}
+
+.time-toggle-group .mat-button-toggle-checked {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+/* Chart-specific styles */
+:host ::ng-deep {
+  .chartjs-render-monitor {
+    animation: none !important;
+  }
+
+  .chartjs-tooltip {
+    background: rgba(255, 255, 255, 0.9) !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: var(--border-radius-md) !important;
+    box-shadow: var(--shadow-md) !important;
+    padding: var(--spacing-sm) !important;
+  }
+
+  .chartjs-legend {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-md) 0;
+  }
+
+  .chartjs-legend-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    cursor: pointer;
+  }
+
+  .chartjs-legend-marker {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .charts-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .dashboard-container {
+    padding: var(--spacing-md);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .chart-container {
+    height: 250px;
+  }
+
+  .time-filter {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+

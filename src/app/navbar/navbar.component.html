@@ -1,40 +1,63 @@
-<mat-toolbar color="primary">
-  <span>E-banking</span>
+<mat-toolbar class="modern-navbar">
+  <div class="navbar-brand">
+    <mat-icon class="brand-icon">account_balance</mat-icon>
+    <span class="brand-text">E-banking</span>
+  </div>
+  
   <span class="navbar-spacer"></span>
-  <button mat-button routerLink="/admin/home">
-    Home
-  </button>
+  
+  <div class="nav-links">
+    <button mat-button routerLink="/admin/home" class="nav-button">
+      <mat-icon>home</mat-icon>
+      <span>Home</span>
+    </button>
 
-  <button mat-button [matMenuTriggerFor]="customerMenu">
-    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
-    Customers
-  </button>
-  <mat-menu #customerMenu>
-    <button mat-menu-item routerLink="/admin/customers" disableRipple>All customers</button>
-    <button mat-menu-item (click)="openNewCustomerDialog()" *ngIf="authService.roles.includes('ADMIN')" disableRipple>New customer</button>
-  </mat-menu>
+    <button mat-button [matMenuTriggerFor]="customerMenu" class="nav-button">
+      <mat-icon>people</mat-icon>
+      <span>Customers</span>
+      <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #customerMenu class="modern-menu">
+      <button mat-menu-item routerLink="/admin/customers" class="menu-item">
+        <mat-icon>list</mat-icon>
+        <span>All customers</span>
+      </button>
+      <button mat-menu-item (click)="openNewCustomerDialog()" *ngIf="authService.roles.includes('ADMIN')" class="menu-item">
+        <mat-icon>person_add</mat-icon>
+        <span>New customer</span>
+      </button>
+    </mat-menu>
 
-  <button mat-button [matMenuTriggerFor]="accountMenu">
-    <mat-icon iconPositionEnd>arrow_drop_down</mat-icon>
-    Accounts
-  </button>
-  <mat-menu #accountMenu>
-    <button mat-menu-item routerLink="/admin/accounts" disableRipple>All Accounts</button>
-    <button mat-menu-item (click)="openNewOperationDialog()" disableRipple>New Operation</button>
-  </mat-menu>
+    <button mat-button [matMenuTriggerFor]="accountMenu" class="nav-button">
+      <mat-icon>account_balance_wallet</mat-icon>
+      <span>Accounts</span>
+      <mat-icon class="dropdown-icon">arrow_drop_down</mat-icon>
+    </button>
+    <mat-menu #accountMenu class="modern-menu">
+      <button mat-menu-item routerLink="/admin/accounts" class="menu-item">
+        <mat-icon>list</mat-icon>
+        <span>All Accounts</span>
+      </button>
+      <button mat-menu-item (click)="openNewOperationDialog()" class="menu-item">
+        <mat-icon>swap_horiz</mat-icon>
+        <span>New Operation</span>
+      </button>
+    </mat-menu>
+  </div>
 
   <span class="navbar-spacer"></span>
-  <div>
-    <button mat-button *ngIf="authService.isAuthenticated">
-      <mat-icon iconPositionEnd>account_circle</mat-icon>
-      {{authService.username}}
+  
+  <div class="user-section">
+    <button mat-button *ngIf="authService.isAuthenticated" class="user-button">
+      <mat-icon>account_circle</mat-icon>
+      <span class="username">{{authService.username}}</span>
+    </button>
+    <button mat-icon-button (click)="handleLogout()" class="logout-button" matTooltip="Logout">
+      <mat-icon>logout</mat-icon>
     </button>
   </div>
-  <button mat-icon-button (click)="handleLogout()">
-    <mat-icon>logout</mat-icon>
-  </button>
 </mat-toolbar>
 
-<div style="min-height: 600px;background-color: #f9fafb" class="container">
+<div class="main-content">
   <router-outlet></router-outlet>
 </div>

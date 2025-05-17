@@ -1,0 +1,138 @@
+.modern-navbar {
+  background-color: var(--surface-color) !important;
+  box-shadow: var(--shadow-md);
+  padding: 0 var(--spacing-lg);
+  height: 64px;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.brand-icon {
+  color: var(--primary-color);
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+}
+
+.brand-text {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.nav-links {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.nav-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary) !important;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.nav-button:hover {
+  color: var(--primary-color) !important;
+  background-color: rgba(37, 99, 235, 0.04) !important;
+}
+
+.nav-button mat-icon {
+  margin-right: 4px;
+}
+
+.dropdown-icon {
+  margin-left: 4px;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.modern-menu {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-xs);
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-sm);
+  transition: all 0.2s ease-in-out;
+}
+
+.menu-item:hover {
+  background-color: rgba(37, 99, 235, 0.04);
+}
+
+.menu-item mat-icon {
+  color: var(--text-secondary);
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.user-section {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.user-button {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  color: var(--text-secondary) !important;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.logout-button {
+  color: var(--text-secondary) !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-button:hover {
+  color: var(--error-color) !important;
+  background-color: rgba(239, 68, 68, 0.04) !important;
+}
+
+.main-content {
+  min-height: calc(100vh - 64px);
+  background-color: var(--background-color);
+  padding: var(--spacing-lg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .modern-navbar {
+    padding: 0 var(--spacing-md);
+  }
+
+  .brand-text {
+    display: none;
+  }
+
+  .nav-button span {
+    display: none;
+  }
+
+  .nav-button mat-icon {
+    margin-right: 0;
+  }
+
+  .username {
+    display: none;
+  }
+}

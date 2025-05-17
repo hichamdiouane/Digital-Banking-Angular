@@ -44,6 +44,7 @@ import { HomeComponent } from './home/home.component';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDividerModule} from '@angular/material/divider';
 import {BaseChartDirective, provideCharts, withDefaultRegisterables} from 'ng2-charts';
+import {MatButtonToggleModule} from '@angular/material/button-toggle';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import {BaseChartDirective, provideCharts, withDefaultRegisterables} from 'ng2-c
     MatDividerModule,
     MatListModule,
     BaseChartDirective,
+    MatButtonToggleModule
   ],
   providers: [
     provideHttpClient(withInterceptors([appHttpInterceptor])),

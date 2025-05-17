@@ -1,42 +1,162 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%;}
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.navbar-spacer{
+/* Modern Design System */
+:root {
+  /* Color System */
+  --primary-color: #2563eb;
+  --primary-light: #60a5fa;
+  --primary-dark: #1d4ed8;
+  --secondary-color: #64748b;
+  --success-color: #22c55e;
+  --error-color: #ef4444;
+  --warning-color: #f59e0b;
+  --background-color: #f8fafc;
+  --surface-color: #ffffff;
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  
+  /* Spacing System */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  
+  /* Border Radius */
+  --border-radius-sm: 0.25rem;
+  --border-radius-md: 0.5rem;
+  --border-radius-lg: 1rem;
+  
+  /* Shadows */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+}
+
+/* Base Styles */
+html, body { 
+  height: 100%;
+  margin: 0;
+  font-family: 'Inter', Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-primary);
+}
+
+/* Layout Utilities */
+.container {
+  padding: var(--spacing-lg);
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.navbar-spacer {
   flex: 1 1 auto;
 }
-.container{
-  padding: 10px;
-}
+
+/* Component Styles */
 .spinner-container {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 150px;
 }
+
 .error-message {
-  color: red;
+  color: var(--error-color);
   text-align: center;
-  margin: 20px 0;
-  font-weight: bold;
+  margin: var(--spacing-lg) 0;
+  font-weight: 500;
+  padding: var(--spacing-md);
+  background-color: #fee2e2;
+  border-radius: var(--border-radius-md);
 }
-.snackbar-below-navbar{
-    margin-top: 75px !important;
+
+.snackbar-below-navbar {
+  margin-top: 75px !important;
 }
+
 .success-snackbar {
-  --mdc-snackbar-container-color: #22c55e;
+  --mdc-snackbar-container-color: var(--success-color);
   --mat-snack-bar-button-color: #dcfce7;
 }
 
 .error-snackbar {
-  --mdc-snackbar-container-color: #ef4444;
+  --mdc-snackbar-container-color: var(--error-color);
   --mat-snack-bar-button-color: #fee2e2;
 }
-.dialog-header{
+
+.dialog-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: var(--spacing-md);
+  border-bottom: 1px solid #e2e8f0;
 }
-.full-width{
+
+.full-width {
   width: 100%;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--surface-color);
+  border-radius: var(--border-radius-md);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-lg);
+  margin-bottom: var(--spacing-lg);
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Button Styles */
+.btn {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--border-radius-md);
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-dark);
+}
+
+/* Form Styles */
+.form-group {
+  margin-bottom: var(--spacing-md);
+}
+
+.form-control {
+  width: 100%;
+  padding: var(--spacing-sm);
+  border: 1px solid #e2e8f0;
+  border-radius: var(--border-radius-md);
+  transition: border-color 0.2s ease-in-out;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.1);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .container {
+    padding: var(--spacing-md);
+  }
+  
+  .card {
+    padding: var(--spacing-md);
+  }
 }
